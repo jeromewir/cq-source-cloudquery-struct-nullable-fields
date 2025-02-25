@@ -1,0 +1,21 @@
+kind: source
+spec:
+  name: "cq-ms"
+  registry: "local"
+  path: "./cq-source-cloudquery-struct-nullable-fields"
+  version: "v1.0.0"
+  tables:
+    - "cloudquery-struct-nullable-fields_sample_table"
+  destinations:
+    - "sqlite"
+    
+---
+kind: destination
+spec:
+  name: sqlite
+  path: "cloudquery/sqlite"
+  registry: cloudquery
+  version: "v2.10.7"
+  spec:
+    connection_string: ./db.sql
+
