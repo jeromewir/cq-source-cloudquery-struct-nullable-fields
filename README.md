@@ -1,63 +1,14 @@
 # CloudQuery cloudquery-struct-nullable-fields Source Plugin
 
-[![test](https://github.com/jeromewir/cq-source-cloudquery-struct-nullable-fields/actions/workflows/test.yaml/badge.svg)](https://github.com/jeromewir/cq-source-cloudquery-struct-nullable-fields/actions/workflows/test.yaml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/jeromewir/cq-source-cloudquery-struct-nullable-fields)](https://goreportcard.com/report/github.com/jeromewir/cq-source-cloudquery-struct-nullable-fields)
+Repo created to demonstrate a potential bug in `transformers.TransformWithStruct` function in the cloudquery SDK.  
+When providing native fields (non-pointer), the expected outcome would be non-nullable fields in the destination.  
+When providing nullable fields (poitners), the expected outcome would be nullable fields in the destination.
 
-A cloudquery-struct-nullable-fields source plugin for CloudQuery that loads data from cloudquery-struct-nullable-fields to any database, data warehouse or data lake supported by [CloudQuery](https://www.cloudquery.io/), such as PostgreSQL, BigQuery, Athena, and many more.
+## Screenshot
 
-## Links
+![Image](https://github.com/user-attachments/assets/8e925655-2f25-4088-b995-2ea4ec2c52e3)
 
- - [CloudQuery Quickstart Guide](https://www.cloudquery.io/docs/quickstart)
- - [Supported Tables](docs/tables/README.md)
+## Reproducing steps
 
-
-## Configuration
-
-The following source configuration file will sync to a PostgreSQL database. See [the CloudQuery Quickstart](https://www.cloudquery.io/docs/quickstart) for more information on how to configure the source and destination.
-
-```yaml
-kind: source
-spec:
-  name: "cloudquery-struct-nullable-fields"
-  path: "jeromewir/cloudquery-struct-nullable-fields"
-  version: "${VERSION}"
-  destinations:
-    - "postgresql"
-  spec:
-    # plugin spec section
-```
-
-## Development
-
-### Run tests
-
-```bash
-make test
-```
-
-### Run linter
-
-```bash
-make lint
-```
-
-### Generate docs
-
-```bash
-make gen-docs
-```
-
-### Develop a Web UI for the plugin
-
-See [cloud-config-ui/README.md](cloud-config-ui/README.md) for more information.
-
-### Obtain API key
-
-Please refer to the [documentation](https://docs.cloudquery.io/docs/deployment/generate-api-key) for instructions.
-
-### Release a new version
-
-1. Run `git tag v1.0.0` to create a new tag for the release (replace `v1.0.0` with the new version number)
-2. Run `git push origin v1.0.0` to push the tag to GitHub  
-
-Once the tag is pushed, a new GitHub Actions workflow will be triggered to build the release binaries and [create the new release](https://docs.cloudquery.io/docs/developers/publishing-an-integration-to-the-hub) on [CloudQuery Hub](https://hub.cloudquery.io).
+1. Run `go build . && cloudquery sync .`
+2. Check nullability of fields with a SQLite db viewer

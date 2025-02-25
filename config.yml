@@ -1,6 +1,6 @@
 kind: source
 spec:
-  name: "cq-ms"
+  name: "cq-nullable-fields"
   registry: "local"
   path: "./cq-source-cloudquery-struct-nullable-fields"
   version: "v1.0.0"
